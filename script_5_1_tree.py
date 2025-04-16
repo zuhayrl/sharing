@@ -1,5 +1,4 @@
-from mininet.topolib import TreeTopo, SingleSwitchTopo
-from mininet.topo import LinearTopo
+from mininet.topolib import TreeTopo
 from mininet.net import Mininet
 from mininet.util import dumpNodeConnections
 from mininet.cli import CLI
@@ -7,16 +6,14 @@ from mininet.log import setLogLevel
 
 def iperf_all_pairs(net):
     hosts = net.hosts
-    print("\nRunning iperf between all host pairs:\n")
     for i in range(len(hosts)):
         for j in range(i + 1, len(hosts)):
             h1 = hosts[i]
             h2 = hosts[j]
-            print(f"{h1.name} -> {h2.name}")
-            bw = net.iperf((h1, h2))
-            print(bw)
+            print(f"\nTesting bandwidth between {h1.name} and {h2.name}")
+            print(net.iperf((h1, h2)))
 
-def run_tree_topo():
+def run():
     topo = TreeTopo(depth=2, fanout=3)
     net = Mininet(topo=topo)
     net.start()
@@ -29,4 +26,4 @@ def run_tree_topo():
 
 if __name__ == '__main__':
     setLogLevel('info')
-    run_tree_topo()
+    run()
