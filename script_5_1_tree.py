@@ -1,4 +1,4 @@
-from mininet.topo import TreeTopo
+from mininet.topolib import TreeTopo, LinearTopo, SingleSwitchTopo
 from mininet.net import Mininet
 from mininet.util import dumpNodeConnections
 from mininet.cli import CLI
